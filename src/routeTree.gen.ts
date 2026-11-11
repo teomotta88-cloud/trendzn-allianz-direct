@@ -10,33 +10,281 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PeopleRouteImport } from './routes/people'
+import { Route as TasteRouteImport } from './routes/taste'
+import { Route as WorldRouteImport } from './routes/world'
+import { Route as CanaliInspoIndexRouteImport } from './routes/canali-inspo.index'
+import { Route as CanaliInspoIdRouteImport } from './routes/canali-inspo.$id'
+import { Route as CompetitorIndexRouteImport } from './routes/competitor.index'
+import { Route as CompetitorIdRouteImport } from './routes/competitor.$id'
+import { Route as PianoEditorialeIndexRouteImport } from './routes/piano-editoriale.index'
+import { Route as ApiPublicHooksAddClientChannelRouteImport } from './routes/api/public/hooks/add-client-channel'
+import { Route as ApiPublicHooksDeleteCanaleRouteImport } from './routes/api/public/hooks/delete-canale'
+import { Route as ApiPublicHooksDeleteTrendSubmissionRouteImport } from './routes/api/public/hooks/delete-trend-submission'
+import { Route as ApiPublicHooksLinkPreviewRouteImport } from './routes/api/public/hooks/link-preview'
+import { Route as ApiPublicHooksScrapeInstagramProfileRouteImport } from './routes/api/public/hooks/scrape-instagram-profile'
+import { Route as ApiPublicHooksSubmitManualRouteImport } from './routes/api/public/hooks/submit-manual'
+import { Route as ApiPublicHooksTiktokOembedRouteImport } from './routes/api/public/hooks/tiktok-oembed'
+import { Route as ApiPublicHooksTrendsJsonRouteImport } from './routes/api/public/hooks/trends-json'
+import { Route as ApiPublicHooksTriggerSyncCanaliFeedRouteImport } from './routes/api/public/hooks/trigger-sync-canali-feed'
+import { Route as ApiPublicHooksUpdateTrendScoreRouteImport } from './routes/api/public/hooks/update-trend-score'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PeopleRoute = PeopleRouteImport.update({
+  id: '/people',
+  path: '/people',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasteRoute = TasteRouteImport.update({
+  id: '/taste',
+  path: '/taste',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorldRoute = WorldRouteImport.update({
+  id: '/world',
+  path: '/world',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CanaliInspoIndexRoute = CanaliInspoIndexRouteImport.update({
+  id: '/canali-inspo/',
+  path: '/canali-inspo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CanaliInspoIdRoute = CanaliInspoIdRouteImport.update({
+  id: '/canali-inspo/$id',
+  path: '/canali-inspo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompetitorIndexRoute = CompetitorIndexRouteImport.update({
+  id: '/competitor/',
+  path: '/competitor/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompetitorIdRoute = CompetitorIdRouteImport.update({
+  id: '/competitor/$id',
+  path: '/competitor/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PianoEditorialeIndexRoute = PianoEditorialeIndexRouteImport.update({
+  id: '/piano-editoriale/',
+  path: '/piano-editoriale/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksAddClientChannelRoute =
+  ApiPublicHooksAddClientChannelRouteImport.update({
+    id: '/api/public/hooks/add-client-channel',
+    path: '/api/public/hooks/add-client-channel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksDeleteCanaleRoute =
+  ApiPublicHooksDeleteCanaleRouteImport.update({
+    id: '/api/public/hooks/delete-canale',
+    path: '/api/public/hooks/delete-canale',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksDeleteTrendSubmissionRoute =
+  ApiPublicHooksDeleteTrendSubmissionRouteImport.update({
+    id: '/api/public/hooks/delete-trend-submission',
+    path: '/api/public/hooks/delete-trend-submission',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksLinkPreviewRoute =
+  ApiPublicHooksLinkPreviewRouteImport.update({
+    id: '/api/public/hooks/link-preview',
+    path: '/api/public/hooks/link-preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksScrapeInstagramProfileRoute =
+  ApiPublicHooksScrapeInstagramProfileRouteImport.update({
+    id: '/api/public/hooks/scrape-instagram-profile',
+    path: '/api/public/hooks/scrape-instagram-profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksSubmitManualRoute =
+  ApiPublicHooksSubmitManualRouteImport.update({
+    id: '/api/public/hooks/submit-manual',
+    path: '/api/public/hooks/submit-manual',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksTiktokOembedRoute =
+  ApiPublicHooksTiktokOembedRouteImport.update({
+    id: '/api/public/hooks/tiktok-oembed',
+    path: '/api/public/hooks/tiktok-oembed',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksTrendsJsonRoute =
+  ApiPublicHooksTrendsJsonRouteImport.update({
+    id: '/api/public/hooks/trends-json',
+    path: '/api/public/hooks/trends-json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksTriggerSyncCanaliFeedRoute =
+  ApiPublicHooksTriggerSyncCanaliFeedRouteImport.update({
+    id: '/api/public/hooks/trigger-sync-canali-feed',
+    path: '/api/public/hooks/trigger-sync-canali-feed',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksUpdateTrendScoreRoute =
+  ApiPublicHooksUpdateTrendScoreRouteImport.update({
+    id: '/api/public/hooks/update-trend-score',
+    path: '/api/public/hooks/update-trend-score',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/people': typeof PeopleRoute
+  '/taste': typeof TasteRoute
+  '/world': typeof WorldRoute
+  '/canali-inspo/$id': typeof CanaliInspoIdRoute
+  '/competitor/$id': typeof CompetitorIdRoute
+  '/canali-inspo/': typeof CanaliInspoIndexRoute
+  '/competitor/': typeof CompetitorIndexRoute
+  '/piano-editoriale/': typeof PianoEditorialeIndexRoute
+  '/api/public/hooks/add-client-channel': typeof ApiPublicHooksAddClientChannelRoute
+  '/api/public/hooks/delete-canale': typeof ApiPublicHooksDeleteCanaleRoute
+  '/api/public/hooks/delete-trend-submission': typeof ApiPublicHooksDeleteTrendSubmissionRoute
+  '/api/public/hooks/link-preview': typeof ApiPublicHooksLinkPreviewRoute
+  '/api/public/hooks/scrape-instagram-profile': typeof ApiPublicHooksScrapeInstagramProfileRoute
+  '/api/public/hooks/submit-manual': typeof ApiPublicHooksSubmitManualRoute
+  '/api/public/hooks/tiktok-oembed': typeof ApiPublicHooksTiktokOembedRoute
+  '/api/public/hooks/trends-json': typeof ApiPublicHooksTrendsJsonRoute
+  '/api/public/hooks/trigger-sync-canali-feed': typeof ApiPublicHooksTriggerSyncCanaliFeedRoute
+  '/api/public/hooks/update-trend-score': typeof ApiPublicHooksUpdateTrendScoreRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/people': typeof PeopleRoute
+  '/taste': typeof TasteRoute
+  '/world': typeof WorldRoute
+  '/canali-inspo/$id': typeof CanaliInspoIdRoute
+  '/competitor/$id': typeof CompetitorIdRoute
+  '/canali-inspo': typeof CanaliInspoIndexRoute
+  '/competitor': typeof CompetitorIndexRoute
+  '/piano-editoriale': typeof PianoEditorialeIndexRoute
+  '/api/public/hooks/add-client-channel': typeof ApiPublicHooksAddClientChannelRoute
+  '/api/public/hooks/delete-canale': typeof ApiPublicHooksDeleteCanaleRoute
+  '/api/public/hooks/delete-trend-submission': typeof ApiPublicHooksDeleteTrendSubmissionRoute
+  '/api/public/hooks/link-preview': typeof ApiPublicHooksLinkPreviewRoute
+  '/api/public/hooks/scrape-instagram-profile': typeof ApiPublicHooksScrapeInstagramProfileRoute
+  '/api/public/hooks/submit-manual': typeof ApiPublicHooksSubmitManualRoute
+  '/api/public/hooks/tiktok-oembed': typeof ApiPublicHooksTiktokOembedRoute
+  '/api/public/hooks/trends-json': typeof ApiPublicHooksTrendsJsonRoute
+  '/api/public/hooks/trigger-sync-canali-feed': typeof ApiPublicHooksTriggerSyncCanaliFeedRoute
+  '/api/public/hooks/update-trend-score': typeof ApiPublicHooksUpdateTrendScoreRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/people': typeof PeopleRoute
+  '/taste': typeof TasteRoute
+  '/world': typeof WorldRoute
+  '/canali-inspo/$id': typeof CanaliInspoIdRoute
+  '/competitor/$id': typeof CompetitorIdRoute
+  '/canali-inspo/': typeof CanaliInspoIndexRoute
+  '/competitor/': typeof CompetitorIndexRoute
+  '/piano-editoriale/': typeof PianoEditorialeIndexRoute
+  '/api/public/hooks/add-client-channel': typeof ApiPublicHooksAddClientChannelRoute
+  '/api/public/hooks/delete-canale': typeof ApiPublicHooksDeleteCanaleRoute
+  '/api/public/hooks/delete-trend-submission': typeof ApiPublicHooksDeleteTrendSubmissionRoute
+  '/api/public/hooks/link-preview': typeof ApiPublicHooksLinkPreviewRoute
+  '/api/public/hooks/scrape-instagram-profile': typeof ApiPublicHooksScrapeInstagramProfileRoute
+  '/api/public/hooks/submit-manual': typeof ApiPublicHooksSubmitManualRoute
+  '/api/public/hooks/tiktok-oembed': typeof ApiPublicHooksTiktokOembedRoute
+  '/api/public/hooks/trends-json': typeof ApiPublicHooksTrendsJsonRoute
+  '/api/public/hooks/trigger-sync-canali-feed': typeof ApiPublicHooksTriggerSyncCanaliFeedRoute
+  '/api/public/hooks/update-trend-score': typeof ApiPublicHooksUpdateTrendScoreRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/people'
+    | '/taste'
+    | '/world'
+    | '/canali-inspo/$id'
+    | '/competitor/$id'
+    | '/canali-inspo/'
+    | '/competitor/'
+    | '/piano-editoriale/'
+    | '/api/public/hooks/add-client-channel'
+    | '/api/public/hooks/delete-canale'
+    | '/api/public/hooks/delete-trend-submission'
+    | '/api/public/hooks/link-preview'
+    | '/api/public/hooks/scrape-instagram-profile'
+    | '/api/public/hooks/submit-manual'
+    | '/api/public/hooks/tiktok-oembed'
+    | '/api/public/hooks/trends-json'
+    | '/api/public/hooks/trigger-sync-canali-feed'
+    | '/api/public/hooks/update-trend-score'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/people'
+    | '/taste'
+    | '/world'
+    | '/canali-inspo/$id'
+    | '/competitor/$id'
+    | '/canali-inspo'
+    | '/competitor'
+    | '/piano-editoriale'
+    | '/api/public/hooks/add-client-channel'
+    | '/api/public/hooks/delete-canale'
+    | '/api/public/hooks/delete-trend-submission'
+    | '/api/public/hooks/link-preview'
+    | '/api/public/hooks/scrape-instagram-profile'
+    | '/api/public/hooks/submit-manual'
+    | '/api/public/hooks/tiktok-oembed'
+    | '/api/public/hooks/trends-json'
+    | '/api/public/hooks/trigger-sync-canali-feed'
+    | '/api/public/hooks/update-trend-score'
+  id:
+    | '__root__'
+    | '/'
+    | '/people'
+    | '/taste'
+    | '/world'
+    | '/canali-inspo/$id'
+    | '/competitor/$id'
+    | '/canali-inspo/'
+    | '/competitor/'
+    | '/piano-editoriale/'
+    | '/api/public/hooks/add-client-channel'
+    | '/api/public/hooks/delete-canale'
+    | '/api/public/hooks/delete-trend-submission'
+    | '/api/public/hooks/link-preview'
+    | '/api/public/hooks/scrape-instagram-profile'
+    | '/api/public/hooks/submit-manual'
+    | '/api/public/hooks/tiktok-oembed'
+    | '/api/public/hooks/trends-json'
+    | '/api/public/hooks/trigger-sync-canali-feed'
+    | '/api/public/hooks/update-trend-score'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PeopleRoute: typeof PeopleRoute
+  TasteRoute: typeof TasteRoute
+  WorldRoute: typeof WorldRoute
+  CanaliInspoIdRoute: typeof CanaliInspoIdRoute
+  CompetitorIdRoute: typeof CompetitorIdRoute
+  CanaliInspoIndexRoute: typeof CanaliInspoIndexRoute
+  CompetitorIndexRoute: typeof CompetitorIndexRoute
+  PianoEditorialeIndexRoute: typeof PianoEditorialeIndexRoute
+  ApiPublicHooksAddClientChannelRoute: typeof ApiPublicHooksAddClientChannelRoute
+  ApiPublicHooksDeleteCanaleRoute: typeof ApiPublicHooksDeleteCanaleRoute
+  ApiPublicHooksDeleteTrendSubmissionRoute: typeof ApiPublicHooksDeleteTrendSubmissionRoute
+  ApiPublicHooksLinkPreviewRoute: typeof ApiPublicHooksLinkPreviewRoute
+  ApiPublicHooksScrapeInstagramProfileRoute: typeof ApiPublicHooksScrapeInstagramProfileRoute
+  ApiPublicHooksSubmitManualRoute: typeof ApiPublicHooksSubmitManualRoute
+  ApiPublicHooksTiktokOembedRoute: typeof ApiPublicHooksTiktokOembedRoute
+  ApiPublicHooksTrendsJsonRoute: typeof ApiPublicHooksTrendsJsonRoute
+  ApiPublicHooksTriggerSyncCanaliFeedRoute: typeof ApiPublicHooksTriggerSyncCanaliFeedRoute
+  ApiPublicHooksUpdateTrendScoreRoute: typeof ApiPublicHooksUpdateTrendScoreRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +296,158 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/people': {
+      id: '/people'
+      path: '/people'
+      fullPath: '/people'
+      preLoaderRoute: typeof PeopleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/taste': {
+      id: '/taste'
+      path: '/taste'
+      fullPath: '/taste'
+      preLoaderRoute: typeof TasteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/world': {
+      id: '/world'
+      path: '/world'
+      fullPath: '/world'
+      preLoaderRoute: typeof WorldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/canali-inspo/': {
+      id: '/canali-inspo/'
+      path: '/canali-inspo'
+      fullPath: '/canali-inspo/'
+      preLoaderRoute: typeof CanaliInspoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/canali-inspo/$id': {
+      id: '/canali-inspo/$id'
+      path: '/canali-inspo/$id'
+      fullPath: '/canali-inspo/$id'
+      preLoaderRoute: typeof CanaliInspoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/competitor/': {
+      id: '/competitor/'
+      path: '/competitor'
+      fullPath: '/competitor/'
+      preLoaderRoute: typeof CompetitorIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/competitor/$id': {
+      id: '/competitor/$id'
+      path: '/competitor/$id'
+      fullPath: '/competitor/$id'
+      preLoaderRoute: typeof CompetitorIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/piano-editoriale/': {
+      id: '/piano-editoriale/'
+      path: '/piano-editoriale'
+      fullPath: '/piano-editoriale/'
+      preLoaderRoute: typeof PianoEditorialeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/add-client-channel': {
+      id: '/api/public/hooks/add-client-channel'
+      path: '/api/public/hooks/add-client-channel'
+      fullPath: '/api/public/hooks/add-client-channel'
+      preLoaderRoute: typeof ApiPublicHooksAddClientChannelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/delete-canale': {
+      id: '/api/public/hooks/delete-canale'
+      path: '/api/public/hooks/delete-canale'
+      fullPath: '/api/public/hooks/delete-canale'
+      preLoaderRoute: typeof ApiPublicHooksDeleteCanaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/delete-trend-submission': {
+      id: '/api/public/hooks/delete-trend-submission'
+      path: '/api/public/hooks/delete-trend-submission'
+      fullPath: '/api/public/hooks/delete-trend-submission'
+      preLoaderRoute: typeof ApiPublicHooksDeleteTrendSubmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/link-preview': {
+      id: '/api/public/hooks/link-preview'
+      path: '/api/public/hooks/link-preview'
+      fullPath: '/api/public/hooks/link-preview'
+      preLoaderRoute: typeof ApiPublicHooksLinkPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/scrape-instagram-profile': {
+      id: '/api/public/hooks/scrape-instagram-profile'
+      path: '/api/public/hooks/scrape-instagram-profile'
+      fullPath: '/api/public/hooks/scrape-instagram-profile'
+      preLoaderRoute: typeof ApiPublicHooksScrapeInstagramProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/submit-manual': {
+      id: '/api/public/hooks/submit-manual'
+      path: '/api/public/hooks/submit-manual'
+      fullPath: '/api/public/hooks/submit-manual'
+      preLoaderRoute: typeof ApiPublicHooksSubmitManualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/tiktok-oembed': {
+      id: '/api/public/hooks/tiktok-oembed'
+      path: '/api/public/hooks/tiktok-oembed'
+      fullPath: '/api/public/hooks/tiktok-oembed'
+      preLoaderRoute: typeof ApiPublicHooksTiktokOembedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/trends-json': {
+      id: '/api/public/hooks/trends-json'
+      path: '/api/public/hooks/trends-json'
+      fullPath: '/api/public/hooks/trends-json'
+      preLoaderRoute: typeof ApiPublicHooksTrendsJsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/trigger-sync-canali-feed': {
+      id: '/api/public/hooks/trigger-sync-canali-feed'
+      path: '/api/public/hooks/trigger-sync-canali-feed'
+      fullPath: '/api/public/hooks/trigger-sync-canali-feed'
+      preLoaderRoute: typeof ApiPublicHooksTriggerSyncCanaliFeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/update-trend-score': {
+      id: '/api/public/hooks/update-trend-score'
+      path: '/api/public/hooks/update-trend-score'
+      fullPath: '/api/public/hooks/update-trend-score'
+      preLoaderRoute: typeof ApiPublicHooksUpdateTrendScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PeopleRoute: PeopleRoute,
+  TasteRoute: TasteRoute,
+  WorldRoute: WorldRoute,
+  CanaliInspoIdRoute: CanaliInspoIdRoute,
+  CompetitorIdRoute: CompetitorIdRoute,
+  CanaliInspoIndexRoute: CanaliInspoIndexRoute,
+  CompetitorIndexRoute: CompetitorIndexRoute,
+  PianoEditorialeIndexRoute: PianoEditorialeIndexRoute,
+  ApiPublicHooksAddClientChannelRoute: ApiPublicHooksAddClientChannelRoute,
+  ApiPublicHooksDeleteCanaleRoute: ApiPublicHooksDeleteCanaleRoute,
+  ApiPublicHooksDeleteTrendSubmissionRoute:
+    ApiPublicHooksDeleteTrendSubmissionRoute,
+  ApiPublicHooksLinkPreviewRoute: ApiPublicHooksLinkPreviewRoute,
+  ApiPublicHooksScrapeInstagramProfileRoute:
+    ApiPublicHooksScrapeInstagramProfileRoute,
+  ApiPublicHooksSubmitManualRoute: ApiPublicHooksSubmitManualRoute,
+  ApiPublicHooksTiktokOembedRoute: ApiPublicHooksTiktokOembedRoute,
+  ApiPublicHooksTrendsJsonRoute: ApiPublicHooksTrendsJsonRoute,
+  ApiPublicHooksTriggerSyncCanaliFeedRoute:
+    ApiPublicHooksTriggerSyncCanaliFeedRoute,
+  ApiPublicHooksUpdateTrendScoreRoute: ApiPublicHooksUpdateTrendScoreRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

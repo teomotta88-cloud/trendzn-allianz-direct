@@ -1,14 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-  type ErrorComponentProps,
-} from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
+import { useEffect, useState, type ReactNode } from "react";
+import { Menu, X } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -35,7 +28,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: ErrorComponentProps) {
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -45,9 +38,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
@@ -75,27 +66,33 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
-    // Each content route, / included, must still set its own head(). Never add og:image or
-    // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Trendzn × Allianz Direct — Trend social & canali inspo" },
+      {
+        name: "description",
+        content:
+          "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria.",
+      },
+      { property: "og:title", content: "Trendzn × Allianz Direct — Trend social & canali inspo" },
+      {
+        property: "og:description",
+        content:
+          "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Trendzn × Allianz Direct — Trend social & canali inspo" },
+      {
+        name: "twitter:description",
+        content:
+          "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria.",
+      },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -120,11 +117,82 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="mx-auto w-full max-w-[1400px] px-4 pb-20 pt-6 sm:px-6 lg:px-10">
+          <Outlet />
+        </main>
+      </div>
     </QueryClientProvider>
+  );
+}
+
+const NAV_ITEMS = [
+  { to: "/", label: "Home" },
+  { to: "/taste", label: "TASTE" },
+  { to: "/world", label: "WORLD" },
+  { to: "/people", label: "PEOPLE" },
+  { to: "/competitor", label: "Competitor" },
+  { to: "/piano-editoriale", label: "Piano Editoriale" },
+];
+
+function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
+      <div className="mx-auto flex max-w-[1400px] items-center gap-6 px-4 py-3 sm:px-6 lg:px-10">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <img src="/brand/logo-full-v2.png" alt="Trendzn" className="h-6 w-auto flex-shrink-0" />
+          <span className="font-display text-sm font-semibold text-muted-foreground">x</span>
+          <img src="/brand/allianz-direct-logo.png" alt="Allianz Direct" className="h-6 w-auto flex-shrink-0" />
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="ml-auto hidden items-center gap-1 md:flex">
+          {NAV_ITEMS.map((it) => (
+            <Link
+              key={it.to}
+              to={it.to}
+              activeOptions={{ exact: it.to === "/" }}
+              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground data-[status=active]:bg-secondary data-[status=active]:text-secondary-foreground"
+            >
+              {it.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Hamburger (mobile) */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="ml-auto rounded-md p-2 text-muted-foreground hover:bg-secondary hover:text-foreground md:hidden"
+          aria-label={open ? "Chiudi menu" : "Apri menu"}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div className="border-t border-border bg-background md:hidden">
+          <nav className="flex flex-col px-4 py-3 gap-1">
+            {NAV_ITEMS.map((it) => (
+              <Link
+                key={it.to}
+                to={it.to}
+                activeOptions={{ exact: it.to === "/" }}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2.5 text-sm text-muted-foreground transition hover:bg-secondary hover:text-secondary-foreground data-[status=active]:bg-secondary data-[status=active]:text-secondary-foreground"
+              >
+                {it.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }
