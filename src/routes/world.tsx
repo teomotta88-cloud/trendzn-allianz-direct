@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useCallback } from "react";
 import { trendAttuali } from "@/lib/trends";
 import type { TrendItem } from "@/lib/trends";
+import { ManualSubmitDialog } from "@/components/ManualSubmitDialog";
 import { TrendGrid } from "@/components/TrendGrid";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -98,12 +99,15 @@ function Page() {
 
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h1 className="font-display text-3xl font-bold sm:text-4xl">WORLD</h1>
-        <p className="max-w-2xl text-sm text-muted-foreground">
-          Un universo visivo che valorizza l'iconico pack Allianz Direct e tutto ciò che rappresenta: qualità premium, ingredienti reali ed esperienza indulgente. Il brand diventa protagonista, simbolo di piacere autentico e distintivo.
-        </p>
-      </div>
+      <header className="flex flex-wrap items-start justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">WORLD</h1>
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            Un universo visivo che valorizza l'iconico pack Allianz Direct e tutto ciò che rappresenta: qualità premium, ingredienti reali ed esperienza indulgente. Il brand diventa protagonista, simbolo di piacere autentico e distintivo.
+          </p>
+        </div>
+        <ManualSubmitDialog section="trend-attuali" onSuccess={fetchRows} />
+      </header>
       {loading ? (
         <div className="text-sm text-muted-foreground">Caricamento…</div>
       ) : (
