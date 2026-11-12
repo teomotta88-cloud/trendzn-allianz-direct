@@ -441,7 +441,7 @@ interface TrendsClientAccount {
 // sono snowflake e codificano il timestamp Unix (secondi) nei 32 bit alti.
 function deriveTikTokDateFromUrl(url: string): string | null {
   const match = url.match(/\/video\/(\d+)/);
-  if (!match) return null;
+  if (!match?.[1]) return null;
   const timestampSeconds = Number(BigInt(match[1]) >> 32n);
   if (!Number.isFinite(timestampSeconds) || timestampSeconds <= 0) return null;
   return new Date(timestampSeconds * 1000).toISOString();

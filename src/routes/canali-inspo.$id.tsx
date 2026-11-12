@@ -6,7 +6,31 @@ import { ArrowLeft, ExternalLink, Search } from "lucide-react";
 
 export const Route = createFileRoute("/canali-inspo/$id")({
   head: () => ({
-    meta: [{ title: "Canale — Allianz Direct" }, { name: "description", content: "Canale di ispirazione social." }],
+    meta: [
+      {
+            "title": "Canale — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Canale di ispirazione social."
+      },
+      {
+            "property": "og:title",
+            "content": "Canale — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Canale di ispirazione social."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Page,
 });

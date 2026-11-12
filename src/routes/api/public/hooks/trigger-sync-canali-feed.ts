@@ -11,7 +11,7 @@ export const Route = createFileRoute("/api/public/hooks/trigger-sync-canali-feed
       // del workflow n8n) tramite l'API workflow_dispatch, usando lo stesso GITHUB_TOKEN
       // server-side già configurato per scrivere trends.json.
       POST: async () => {
-        const token = process.env.GITHUB_TOKEN;
+        const token = process.env["GITHUB_TOKEN"];
         if (!token) {
           return Response.json({ ok: false, error: "GITHUB_TOKEN non configurato" }, { status: 500 });
         }

@@ -9,12 +9,30 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/canali-inspo/")({
   head: () => ({
     meta: [
-      { title: "Canali Inspo — Allianz Direct" },
       {
-        name: "description",
-        content: "Bacheca di account e siti da seguire per inspo social, format, meme e real time marketing.",
+            "title": "Canali Inspo — Allianz Direct"
       },
-    ],
+      {
+            "name": "description",
+            "content": "Bacheca di account e siti da seguire per inspo social, format, meme e real time marketing."
+      },
+      {
+            "property": "og:title",
+            "content": "Canali Inspo — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Bacheca di account e siti da seguire per inspo social, format, meme e real time marketing."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Feed,
 });
@@ -30,9 +48,9 @@ function detectPlatform(url: string): "instagram" | "tiktok" | "youtube" | "web"
 
 function extractHandle(url: string): string {
   try {
-    const clean = url.replace(/\/$/, "").split("?")[0];
+    const clean = url.replace(/\/$/, "").split("?")[0] ?? url;
     const parts = clean.split("/");
-    return parts[parts.length - 1].replace(/^@/, "") || url;
+    return (parts[parts.length - 1] ?? "").replace(/^@/, "") || url;
   } catch {
     return url;
   }
@@ -245,6 +263,7 @@ function Feed() {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {filtered.map((c) => {
           const main = c.accounts[0];
+          if (!main) return null;
           const initial =
             c.name
               .replace(/[^a-zA-Z0-9]/g, "")

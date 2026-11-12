@@ -42,9 +42,9 @@ export const canaliInspo = data.canali_inspo as CanaleInspo[];
 // ritorna null.
 export function extractUsername(url: string): string | null {
   const tt = url.match(/tiktok\.com\/@([^/]+)/i);
-  if (tt) return tt[1];
+  if (tt) return tt[1] ?? null;
   const ig = url.match(/instagram\.com\/([^/]+)\/(?:p|reel|reels|tv)\//i);
-  if (ig) return ig[1];
+  if (ig) return ig[1] ?? null;
   return null;
 }
 
