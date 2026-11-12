@@ -10,6 +10,7 @@ import {
   ChevronRight,
   X,
   ExternalLink,
+  Link2,
 } from "lucide-react";
 import {
   type EditorialPost,
@@ -21,16 +22,31 @@ import {
   listClientChannels,
 } from "@/lib/editorialPlan";
 
-// Profilo Allianz Direct Italia (placeholder: aggiornare con i dati reali del profilo)
-const FALLBACK_PROFILE = {
-  avatar: "/brand/allianz-direct-mark.png",
-  handle: "allianzdirect_it",
+type Profile = {
+  avatar: string;
+  handle: string;
+  name: string;
+  category?: string;
+  verified?: boolean;
+  bio: string;
+  linkUrl: string;
+  posts: string;
+  followers: string;
+  following: string;
+};
+
+// Profilo Instagram di Allianz Direct Italia (usato finché il profilo non viene recuperato dal canale cliente)
+const FALLBACK_PROFILE: Profile = {
+  avatar: "/brand/allianz-direct-avatar.png",
+  handle: "allianzdirectit",
   name: "Allianz Direct Italia",
-  bio: "Assicurazioni online\nAllianz Direct",
-  linkUrl: "www.allianzdirect.it",
-  posts: "0",
-  followers: "0",
-  following: "0",
+  category: "Compagnia assicurativa",
+  verified: true,
+  bio: "Proteggiamo ciò che per te è importante.\nCalcola online il tuo preventivo 🚘 🛵🏠",
+  linkUrl: "https://linktr.ee/AllianzDirectIT",
+  posts: "641",
+  followers: "24,4K",
+  following: "14",
 };
 
 function isVideo(url: string, type: string | null | undefined) {
@@ -59,7 +75,7 @@ export function InstagramFeedPreview({ posts }: { posts: EditorialPost[] }) {
     };
   }, []);
 
-  const PROFILE = igChannel && igChannel.avatar_url && igChannel.followers_count
+  const PROFILE: Profile = igChannel && igChannel.avatar_url && igChannel.followers_count
     ? {
         avatar: igChannel.avatar_url,
         handle: igChannel.handle,
@@ -136,9 +152,25 @@ export function InstagramFeedPreview({ posts }: { posts: EditorialPost[] }) {
   return (
     <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-5 sm:p-8">
       <div className="flex items-center gap-6 sm:gap-10">
-        <img src={PROFILE.avatar} alt={PROFILE.handle} className="size-20 rounded-full object-cover sm:size-32" />
+        <div className="rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-fuchsia-600 p-[3px]">
+          <div className="rounded-full bg-card p-[3px]">
+            <img src={PROFILE.avatar} alt={PROFILE.handle} className="size-20 rounded-full object-cover sm:size-32" />
+          </div>
+        </div>
         <div className="flex-1 space-y-3">
-          <h2 className="text-lg font-semibold">{PROFILE.handle}</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-semibold">{PROFILE.handle}</h2>
+            {PROFILE.verified && (
+              <svg viewBox="0 0 24 24" className="size-4 flex-shrink-0" aria-label="Account verificato">
+                <path
+                  fill="#0095f6"
+                  d="M12 1.5l2.4 1.7 2.9-.2 1.2 2.7 2.6 1.3-.3 2.9L22.5 12l-1.7 2.4.3 2.9-2.6 1.3-1.2 2.7-2.9-.2L12 22.5l-2.4-1.7-2.9.2-1.2-2.7-2.6-1.3.3-2.9L1.5 12l1.7-2.4-.3-2.9 2.6-1.3 1.2-2.7 2.9.2z"
+                />
+                <path fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M7.8 12.4l2.9 2.9 5.5-5.8" />
+              </svg>
+            )}
+            <span className="text-muted-foreground">···</span>
+          </div>
           <div className="flex gap-6 text-sm">
             <span><strong>{PROFILE.posts}</strong> post</span>
             <span><strong>{PROFILE.followers}</strong> follower</span>
@@ -146,9 +178,11 @@ export function InstagramFeedPreview({ posts }: { posts: EditorialPost[] }) {
           </div>
           <div className="text-sm">
             <p className="font-semibold">{PROFILE.name}</p>
+            {PROFILE.category && <p className="text-muted-foreground">{PROFILE.category}</p>}
             <p className="whitespace-pre-line text-muted-foreground">{PROFILE.bio}</p>
             {PROFILE.linkUrl && (
-              <a href={PROFILE.linkUrl} target="_blank" rel="noreferrer" className="text-primary">
+              <a href={PROFILE.linkUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-medium text-primary">
+                <Link2 className="size-3.5" />
                 {PROFILE.linkUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
               </a>
             )}
