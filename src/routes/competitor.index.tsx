@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { ManualSubmitDialog } from "@/components/ManualSubmitDialog";
 import { PlatformIcon } from "@/components/SocialEmbed";
 import { Search, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -268,6 +269,7 @@ function CompetitorView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => void 
             Brand e competitor monitorati automaticamente.
           </p>
         </div>
+        <ManualSubmitDialog section="influencer" onSuccess={handleManualSuccess} />
       </header>
 
       {tab !== undefined && setTab && (
@@ -861,7 +863,10 @@ function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => v
           Post recenti dai competitor monitorati su Instagram e TikTok.
         </p>
       </div>
-      <SyncButton endpoint={GITHUB_SYNC_ENDPOINT} label="↻ Sincronizza ora" />
+      <div className="flex flex-wrap items-center gap-2">
+        <ManualSubmitDialog section="influencer" />
+        <SyncButton endpoint={GITHUB_SYNC_ENDPOINT} label="↻ Sincronizza ora" />
+      </div>
     </header>
   );
 
