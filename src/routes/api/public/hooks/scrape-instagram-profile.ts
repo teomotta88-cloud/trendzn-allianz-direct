@@ -23,7 +23,7 @@ function extractHandle(url: string): string | null {
 function matchMeta(html: string, property: string): string | null {
   const re = new RegExp(`<meta[^>]+property=["']${property}["'][^>]+content=["']([^"']*)["']`, "i");
   const m = html.match(re);
-  return m ? m[1] : null;
+  return m?.[1] ?? null;
 }
 
 // Instagram non espone un'API pubblica senza login: leggiamo i meta tag Open
@@ -61,7 +61,7 @@ async function scrapeInstagramProfile(url: string): Promise<ScrapedProfile | nul
   let displayName: string | null = null;
   if (title) {
     const m = title.match(/^(.*?)\s*\(@[^)]+\)/);
-    displayName = (m ? m[1] : title).trim() || null;
+    displayName = (m?.[1] ?? title).trim() || null;
   }
 
   let followersCount: string | null = null;
@@ -72,9 +72,9 @@ async function scrapeInstagramProfile(url: string): Promise<ScrapedProfile | nul
       /^([\d.,]+\s*[KMB]?)\s+Followers,\s*([\d.,]+\s*[KMB]?)\s+Following,\s*([\d.,]+\s*[KMB]?)\s+Posts/i,
     );
     if (m) {
-      followersCount = m[1].trim();
-      followingCount = m[2].trim();
-      postsCount = m[3].trim();
+      followersCount = m[1]?.trim() ?? null;
+      followingCount = m[2]?.trim() ?? null;
+      postsCount = m[3]?.trim() ?? null;
     }
   }
 

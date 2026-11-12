@@ -53,7 +53,10 @@ export function PostMediaGallery({ postId }: { postId: string }) {
   async function handleMove(idx: number, dir: -1 | 1) {
     const target = idx + dir;
     if (target < 0 || target >= media.length) return;
-    await swapMediaPosition(media[idx], media[target]);
+    const sourceMedia = media[idx];
+    const targetMedia = media[target];
+    if (!sourceMedia || !targetMedia) return;
+    await swapMediaPosition(sourceMedia, targetMedia);
     await refresh();
   }
 
@@ -64,6 +67,7 @@ export function PostMediaGallery({ postId }: { postId: string }) {
     if (sourceIdx === null || sourceIdx === targetIdx) return;
     const reordered = [...media];
     const [moved] = reordered.splice(sourceIdx, 1);
+    if (!moved) return;
     reordered.splice(targetIdx, 0, moved);
     setMedia(reordered);
     await reorderMedia(reordered);

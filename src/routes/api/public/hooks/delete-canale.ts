@@ -13,7 +13,7 @@ export const Route = createFileRoute("/api/public/hooks/delete-canale")({
             return Response.json({ ok: false, error: "canaleId mancante" }, { status: 400 });
           }
 
-          const token = process.env.GITHUB_TOKEN;
+          const token = process.env["GITHUB_TOKEN"];
           if (!token) {
             return Response.json({ ok: false, error: "no_token" }, { status: 500 });
           }

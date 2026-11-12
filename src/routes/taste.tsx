@@ -7,7 +7,31 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/taste")({
   head: () => ({
-    meta: [{ title: "TASTE — Allianz Direct" }],
+    meta: [
+      {
+            "title": "TASTE — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Trend social e ispirazioni per TASTE di Allianz Direct."
+      },
+      {
+            "property": "og:title",
+            "content": "TASTE — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Trend social e ispirazioni per TASTE di Allianz Direct."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Page,
 });

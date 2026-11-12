@@ -7,7 +7,31 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/world")({
   head: () => ({
-    meta: [{ title: "WORLD — Allianz Direct" }],
+    meta: [
+      {
+            "title": "WORLD — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Trend social e ispirazioni per WORLD di Allianz Direct."
+      },
+      {
+            "property": "og:title",
+            "content": "WORLD — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Trend social e ispirazioni per WORLD di Allianz Direct."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Page,
 });

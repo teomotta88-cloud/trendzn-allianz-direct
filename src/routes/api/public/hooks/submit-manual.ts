@@ -31,7 +31,7 @@ function urlBase(url: string): string {
     const u = new URL(url);
     return u.origin + u.pathname.replace(/\/$/, "");
   } catch {
-    return url.split("?")[0].replace(/\/$/, "");
+    return (url.split("?")[0] ?? url).replace(/\/$/, "");
   }
 }
 
@@ -62,9 +62,9 @@ function normalizeUrl(url: string): string {
 
 function extractHandleFromUrl(url: string): string | null {
   try {
-    const clean = url.replace(/\/$/, "").split("?")[0];
+    const clean = url.replace(/\/$/, "").split("?")[0] ?? url;
     const parts = clean.split("/");
-    const handle = parts[parts.length - 1].replace(/^@/, "");
+    const handle = (parts[parts.length - 1] ?? "").replace(/^@/, "");
     return handle || null;
   } catch {
     return null;
@@ -81,7 +81,7 @@ const CATEGORY_LABEL: Record<Section, string> = {
 };
 
 async function syncCanaleToGitHub(url: string, title: string | null): Promise<string> {
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env["GITHUB_TOKEN"];
   if (!token) return "no_token";
 
   try {
@@ -106,9 +106,9 @@ async function syncCanaleToGitHub(url: string, title: string | null): Promise<st
     }
     function extractHandleLocal(u: string) {
       try {
-        const clean = u.replace(/\/$/, "").split("?")[0];
+        const clean = u.replace(/\/$/, "").split("?")[0] ?? u;
         const parts = clean.split("/");
-        return parts[parts.length - 1].replace(/^@/, "") || u;
+        return (parts[parts.length - 1] ?? "").replace(/^@/, "") || u;
       } catch {
         return u;
       }
@@ -161,7 +161,7 @@ async function syncInfluencerToGitHub(
   nomeInfluencer: string | null,
   cliente: string | null,
 ): Promise<string> {
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env["GITHUB_TOKEN"];
   if (!token) return "no_token";
 
   try {
@@ -190,9 +190,9 @@ async function syncInfluencerToGitHub(
     }
     function extractHandleLocal(u: string) {
       try {
-        const clean = u.replace(/\/$/, "").split("?")[0];
+        const clean = u.replace(/\/$/, "").split("?")[0] ?? u;
         const parts = clean.split("/");
-        return parts[parts.length - 1].replace(/^@/, "") || u;
+        return (parts[parts.length - 1] ?? "").replace(/^@/, "") || u;
       } catch {
         return u;
       }
