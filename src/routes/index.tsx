@@ -5,13 +5,30 @@ import { ArrowRight, Zap, TrendingUp, Sparkles, CalendarDays } from "lucide-reac
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Trendzn × Allianz Direct — Trend social & canali inspo" },
       {
-        name: "description",
-        content:
-          "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria.",
+            "title": "Trendzn × Allianz Direct — Trend social & canali inspo"
       },
-    ],
+      {
+            "name": "description",
+            "content": "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria."
+      },
+      {
+            "property": "og:title",
+            "content": "Trendzn × Allianz Direct — Trend social & canali inspo"
+      },
+      {
+            "property": "og:description",
+            "content": "Esplora trend social real time, trend attuali e canali di ispirazione, filtrabili per industry, piattaforma e categoria."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Index,
 });

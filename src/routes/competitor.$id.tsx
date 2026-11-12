@@ -6,7 +6,31 @@ import { ArrowLeft, ExternalLink, Search } from "lucide-react";
 
 export const Route = createFileRoute("/competitor/$id")({
   head: () => ({
-    meta: [{ title: "Competitor — Allianz Direct" }, { name: "description", content: "Profilo competitor monitorato." }],
+    meta: [
+      {
+            "title": "Profilo competitor — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Profilo competitor monitorato."
+      },
+      {
+            "property": "og:title",
+            "content": "Profilo competitor — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Profilo competitor monitorato."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: Page,
 });
@@ -197,7 +221,7 @@ function Page() {
     return (
       <div className="py-20 text-center">
         <h1 className="font-display text-2xl font-bold">Profilo non trovato</h1>
-        <Link to="/influencer" className="mt-4 inline-block text-primary">
+        <Link to="/competitor" className="mt-4 inline-block text-primary">
           Torna ai competitor
         </Link>
       </div>
@@ -215,7 +239,7 @@ function Page() {
   return (
     <div className="space-y-8">
       <Link
-        to="/influencer"
+        to="/competitor"
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="size-4" /> Tutti i competitor

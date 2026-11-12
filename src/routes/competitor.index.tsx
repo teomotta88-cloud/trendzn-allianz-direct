@@ -7,12 +7,30 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/competitor/")({
   head: () => ({
     meta: [
-      { title: "Competitor — Allianz Direct" },
       {
-        name: "description",
-        content: "Competitor analysis - Profili brand e competitor monitorati.",
+            "title": "Competitor — Allianz Direct"
       },
-    ],
+      {
+            "name": "description",
+            "content": "Competitor analysis - Profili brand e competitor monitorati."
+      },
+      {
+            "property": "og:title",
+            "content": "Competitor — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Competitor analysis - Profili brand e competitor monitorati."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: CompetitorPage,
 });
@@ -30,9 +48,9 @@ function detectPlatform(url: string): "instagram" | "tiktok" | "youtube" | "web"
 
 function extractHandle(url: string): string {
   try {
-    const clean = url.replace(/\/$/, "").split("?")[0];
+    const clean = url.replace(/\/$/, "").split("?")[0] ?? url;
     const parts = clean.split("/");
-    return parts[parts.length - 1].replace(/^@/, "") || url;
+    return (parts[parts.length - 1] ?? "").replace(/^@/, "") || url;
   } catch {
     return url;
   }
@@ -302,6 +320,7 @@ function CompetitorView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => void 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {filtered.map((c) => {
           const main = c.accounts[0];
+          if (!main) return null;
           const initial =
             c.name
               .replace(/[^a-zA-Z0-9]/g, "")
@@ -476,7 +495,7 @@ function PlatformBadge({ platform }: { platform: string }) {
     youtube: { bg: "#fce8e8", text: "#d93025" },
     web: { bg: "#f0f4f8", text: "#64748b" },
   };
-  const c = colors[platform] || colors.web;
+  const c = colors[platform] ?? { bg: "#f0f4f8", text: "#64748b" };
   const labels: Record<string, string> = {
     instagram: "Instagram",
     tiktok: "TikTok",
@@ -511,7 +530,7 @@ function LazyEmbed({ embedUrl, height }: { embedUrl: string; height: number }) {
     if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0]?.isIntersecting) {
           setVisible(true);
           observer.disconnect();
         }

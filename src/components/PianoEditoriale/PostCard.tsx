@@ -255,7 +255,7 @@ export function PostCard({
           label="Copy"
           approved={approvals.copy}
           onToggle={() => handleToggle("copy")}
-          maxContentHeight={editingCopy ? undefined : visualContentHeight}
+          {...(!editingCopy && visualContentHeight !== undefined ? { maxContentHeight: visualContentHeight } : {})}
         >
           {post.canali.length === 0 ? (
             <p className="text-xs text-muted-foreground">—</p>
@@ -300,7 +300,7 @@ export function PostCard({
                       </div>
                       {sameAsIG ? (
                         <p className="whitespace-pre-line text-[11px] leading-snug text-foreground/90">
-                          {channelCopies.IG || "—"}
+                          {channelCopies["IG"] || "—"}
                         </p>
                       ) : (
                         <EditableText
@@ -323,7 +323,7 @@ export function PostCard({
           label="Copy Visual"
           approved={approvals.copy_visual}
           onToggle={() => handleToggle("copy_visual")}
-          maxContentHeight={editingCopyVisual ? undefined : visualContentHeight}
+          {...(!editingCopyVisual && visualContentHeight !== undefined ? { maxContentHeight: visualContentHeight } : {})}
         >
           <EditableText
             value={copyVisual}

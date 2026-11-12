@@ -19,7 +19,7 @@ function urlBase(url: string): string {
     const u = new URL(url);
     return u.origin + u.pathname.replace(/\/$/, "");
   } catch {
-    return url.split("?")[0].replace(/\/$/, "");
+    return (url.split("?")[0] ?? url).replace(/\/$/, "");
   }
 }
 
@@ -27,7 +27,7 @@ function urlBase(url: string): string {
 // struttura usata per "canali_inspo": il sync automatico (GitHub Action via
 // RSS-Bridge) monitora questa lista senza bisogno di modifiche allo script.
 async function syncClientChannelToGitHub(canale: string, handle: string, url: string): Promise<string> {
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env["GITHUB_TOKEN"];
   if (!token) return "no_token";
 
   try {

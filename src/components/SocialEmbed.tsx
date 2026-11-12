@@ -18,7 +18,7 @@ function useVisible<T extends HTMLElement>(threshold = 0.5) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry?.isIntersecting ?? false), { threshold });
     observer.observe(el);
     return () => observer.disconnect();
   }, [threshold]);

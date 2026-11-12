@@ -21,12 +21,30 @@ import { ClientChannelsPanel } from "@/components/PianoEditoriale/ClientChannels
 export const Route = createFileRoute("/piano-editoriale/")({
   head: () => ({
     meta: [
-      { title: "Piano Editoriale — Allianz Direct" },
       {
-        name: "description",
-        content: "Calendario editoriale mensile con copy, visual e approvazioni.",
+            "title": "Piano Editoriale — Allianz Direct"
       },
-    ],
+      {
+            "name": "description",
+            "content": "Calendario editoriale mensile con copy, visual e approvazioni."
+      },
+      {
+            "property": "og:title",
+            "content": "Piano Editoriale — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Calendario editoriale mensile con copy, visual e approvazioni."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
   }),
   component: PianoEditorialePage,
 });
