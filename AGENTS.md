@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep the existing trend submission model in managed Cloud migrations; generated client types must reflect real tables rather than local type overrides.
+- Keep trend submission browser access locked until authenticated policies are configured; connecting Cloud alone must not expose stored submissions.
