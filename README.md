@@ -1,6 +1,6 @@
-# Trendzn Allianz Direct
+# Trendzn × Allianz Direct
 
-una pagina bianca
+Radar trend social e piano editoriale di Allianz Direct.
 
 This project was built with [Lovable](https://lovable.dev).
 
