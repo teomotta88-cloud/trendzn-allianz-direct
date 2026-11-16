@@ -10,19 +10,19 @@ export const Route = createFileRoute("/world")({
   head: () => ({
     meta: [
       {
-            "title": "WORLD — Allianz Direct"
+            "title": "Rassicurazioni su misura — Allianz Direct"
       },
       {
             "name": "description",
-            "content": "Trend social e ispirazioni per WORLD di Allianz Direct."
+            "content": "Trend social e ispirazioni per Rassicurazioni su misura di Allianz Direct."
       },
       {
             "property": "og:title",
-            "content": "WORLD — Allianz Direct"
+            "content": "Rassicurazioni su misura — Allianz Direct"
       },
       {
             "property": "og:description",
-            "content": "Trend social e ispirazioni per WORLD di Allianz Direct."
+            "content": "Trend social e ispirazioni per Rassicurazioni su misura di Allianz Direct."
       },
       {
             "property": "og:type",
@@ -101,7 +101,7 @@ function Page() {
     <div className="space-y-8">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="space-y-2">
-          <h1 className="font-display text-3xl font-bold sm:text-4xl">WORLD</h1>
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">Rassicurazioni su misura</h1>
           <p className="max-w-2xl text-sm text-muted-foreground">
             Un universo visivo che valorizza l'iconico pack Allianz Direct e tutto ciò che rappresenta: qualità premium, ingredienti reali ed esperienza indulgente. Il brand diventa protagonista, simbolo di piacere autentico e distintivo.
           </p>

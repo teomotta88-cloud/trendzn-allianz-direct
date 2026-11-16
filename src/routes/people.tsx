@@ -10,19 +10,19 @@ export const Route = createFileRoute("/people")({
   head: () => ({
     meta: [
       {
-            "title": "PEOPLE — Allianz Direct"
+            "title": "The smartness effect — Allianz Direct"
       },
       {
             "name": "description",
-            "content": "Trend social e ispirazioni per PEOPLE di Allianz Direct."
+            "content": "Trend social e ispirazioni per The smartness effect di Allianz Direct."
       },
       {
             "property": "og:title",
-            "content": "PEOPLE — Allianz Direct"
+            "content": "The smartness effect — Allianz Direct"
       },
       {
             "property": "og:description",
-            "content": "Trend social e ispirazioni per PEOPLE di Allianz Direct."
+            "content": "Trend social e ispirazioni per The smartness effect di Allianz Direct."
       },
       {
             "property": "og:type",
@@ -101,7 +101,7 @@ function Page() {
     <div className="space-y-8">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="space-y-2">
-          <h1 className="font-display text-3xl font-bold sm:text-4xl">PEOPLE</h1>
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">The smartness effect</h1>
           <p className="max-w-2xl text-sm text-muted-foreground">
             Persone curiose e fedeli a sé stesse che trovano equilibrio nei piccoli piaceri quotidiani. Per loro, concedersi un momento Allianz Direct non è un'eccezione, ma parte di uno stile di vita consapevole e senza compromessi.
           </p>
