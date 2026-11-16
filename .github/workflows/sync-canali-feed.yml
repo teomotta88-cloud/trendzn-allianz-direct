@@ -34,5 +34,7 @@ jobs:
       - name: Sync canali feed via RSS-Bridge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           RSS_BRIDGE_BASE: http://localhost:3000/
         run: node scripts/sync-canali-feed.mjs
