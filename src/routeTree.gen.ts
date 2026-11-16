@@ -11,7 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PeopleRouteImport } from './routes/people'
+import { Route as ProdottiDirectRouteImport } from './routes/prodotti-direct'
+import { Route as RassicurazioniSuMisuraRouteImport } from './routes/rassicurazioni-su-misura'
 import { Route as TasteRouteImport } from './routes/taste'
+import { Route as TheSmartnessEffectRouteImport } from './routes/the-smartness-effect'
 import { Route as WorldRouteImport } from './routes/world'
 import { Route as CanaliInspoIndexRouteImport } from './routes/canali-inspo.index'
 import { Route as CanaliInspoIdRouteImport } from './routes/canali-inspo.$id'
@@ -39,9 +42,24 @@ const PeopleRoute = PeopleRouteImport.update({
   path: '/people',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProdottiDirectRoute = ProdottiDirectRouteImport.update({
+  id: '/prodotti-direct',
+  path: '/prodotti-direct',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RassicurazioniSuMisuraRoute = RassicurazioniSuMisuraRouteImport.update({
+  id: '/rassicurazioni-su-misura',
+  path: '/rassicurazioni-su-misura',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasteRoute = TasteRouteImport.update({
   id: '/taste',
   path: '/taste',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheSmartnessEffectRoute = TheSmartnessEffectRouteImport.update({
+  id: '/the-smartness-effect',
+  path: '/the-smartness-effect',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorldRoute = WorldRouteImport.update({
@@ -138,7 +156,10 @@ const ApiPublicHooksUpdateTrendScoreRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/people': typeof PeopleRoute
+  '/prodotti-direct': typeof ProdottiDirectRoute
+  '/rassicurazioni-su-misura': typeof RassicurazioniSuMisuraRoute
   '/taste': typeof TasteRoute
+  '/the-smartness-effect': typeof TheSmartnessEffectRoute
   '/world': typeof WorldRoute
   '/canali-inspo/$id': typeof CanaliInspoIdRoute
   '/competitor/$id': typeof CompetitorIdRoute
@@ -159,7 +180,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/people': typeof PeopleRoute
+  '/prodotti-direct': typeof ProdottiDirectRoute
+  '/rassicurazioni-su-misura': typeof RassicurazioniSuMisuraRoute
   '/taste': typeof TasteRoute
+  '/the-smartness-effect': typeof TheSmartnessEffectRoute
   '/world': typeof WorldRoute
   '/canali-inspo/$id': typeof CanaliInspoIdRoute
   '/competitor/$id': typeof CompetitorIdRoute
@@ -181,7 +205,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/people': typeof PeopleRoute
+  '/prodotti-direct': typeof ProdottiDirectRoute
+  '/rassicurazioni-su-misura': typeof RassicurazioniSuMisuraRoute
   '/taste': typeof TasteRoute
+  '/the-smartness-effect': typeof TheSmartnessEffectRoute
   '/world': typeof WorldRoute
   '/canali-inspo/$id': typeof CanaliInspoIdRoute
   '/competitor/$id': typeof CompetitorIdRoute
@@ -204,7 +231,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/people'
+    | '/prodotti-direct'
+    | '/rassicurazioni-su-misura'
     | '/taste'
+    | '/the-smartness-effect'
     | '/world'
     | '/canali-inspo/$id'
     | '/competitor/$id'
@@ -225,7 +255,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/people'
+    | '/prodotti-direct'
+    | '/rassicurazioni-su-misura'
     | '/taste'
+    | '/the-smartness-effect'
     | '/world'
     | '/canali-inspo/$id'
     | '/competitor/$id'
@@ -246,7 +279,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/people'
+    | '/prodotti-direct'
+    | '/rassicurazioni-su-misura'
     | '/taste'
+    | '/the-smartness-effect'
     | '/world'
     | '/canali-inspo/$id'
     | '/competitor/$id'
@@ -268,7 +304,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PeopleRoute: typeof PeopleRoute
+  ProdottiDirectRoute: typeof ProdottiDirectRoute
+  RassicurazioniSuMisuraRoute: typeof RassicurazioniSuMisuraRoute
   TasteRoute: typeof TasteRoute
+  TheSmartnessEffectRoute: typeof TheSmartnessEffectRoute
   WorldRoute: typeof WorldRoute
   CanaliInspoIdRoute: typeof CanaliInspoIdRoute
   CompetitorIdRoute: typeof CompetitorIdRoute
@@ -303,11 +342,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PeopleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prodotti-direct': {
+      id: '/prodotti-direct'
+      path: '/prodotti-direct'
+      fullPath: '/prodotti-direct'
+      preLoaderRoute: typeof ProdottiDirectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rassicurazioni-su-misura': {
+      id: '/rassicurazioni-su-misura'
+      path: '/rassicurazioni-su-misura'
+      fullPath: '/rassicurazioni-su-misura'
+      preLoaderRoute: typeof RassicurazioniSuMisuraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/taste': {
       id: '/taste'
       path: '/taste'
       fullPath: '/taste'
       preLoaderRoute: typeof TasteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-smartness-effect': {
+      id: '/the-smartness-effect'
+      path: '/the-smartness-effect'
+      fullPath: '/the-smartness-effect'
+      preLoaderRoute: typeof TheSmartnessEffectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/world': {
@@ -428,7 +488,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PeopleRoute: PeopleRoute,
+  ProdottiDirectRoute: ProdottiDirectRoute,
+  RassicurazioniSuMisuraRoute: RassicurazioniSuMisuraRoute,
   TasteRoute: TasteRoute,
+  TheSmartnessEffectRoute: TheSmartnessEffectRoute,
   WorldRoute: WorldRoute,
   CanaliInspoIdRoute: CanaliInspoIdRoute,
   CompetitorIdRoute: CompetitorIdRoute,
