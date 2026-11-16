@@ -36,21 +36,21 @@ export const Route = createFileRoute("/")({
 function Index() {
   const cards = [
     {
-      to: "/taste",
+      to: "/prodotti-direct",
       label: "Prodotti Direct",
       //count: trendRealTime.length,
       icon: Zap,
       blurb: "Il momento in cui il morso rivela tutta la magia di Allianz Direct: il crock irresistibile, la frutta vera e la perfetta combinazione con il cioccolato.",
     },
     {
-      to: "/world",
+      to: "/rassicurazioni-su-misura",
       label: "Rassicurazioni su misura",
       //count: trendAttuali.length,
       icon: TrendingUp,
       blurb: "Un universo visivo che valorizza l'iconico pack Allianz Direct e tutto ciò che rappresenta: qualità premium, ingredienti reali ed esperienza indulgente.",
     },
     {
-      to: "/people",
+      to: "/the-smartness-effect",
       label: "The smartness effect",
       // count: trendEvergreen.length,
       icon: Sparkles,

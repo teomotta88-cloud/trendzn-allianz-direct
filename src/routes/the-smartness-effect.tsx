@@ -1,0 +1,118 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState, useCallback } from "react";
+import { trendEvergreen } from "@/lib/trends";
+import type { TrendItem } from "@/lib/trends";
+import { ManualSubmitDialog } from "@/components/ManualSubmitDialog";
+import { TrendGrid } from "@/components/TrendGrid";
+import { supabase } from "@/integrations/supabase/client";
+
+export const Route = createFileRoute("/the-smartness-effect")({
+  head: () => ({
+    meta: [
+      {
+            "title": "The smartness effect — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Trend social e ispirazioni per The smartness effect di Allianz Direct."
+      },
+      {
+            "property": "og:title",
+            "content": "The smartness effect — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Trend social e ispirazioni per The smartness effect di Allianz Direct."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
+  }),
+  component: Page,
+});
+
+type DbRow = {
+  id: string;
+  url: string;
+  title: string | null;
+  category: string | null;
+  industry: string | null;
+  tags: string[] | null;
+  score: number | null;
+  created_at: string | null;
+  raw_email: string | null;
+};
+
+function rowToTrendItem(row: DbRow): TrendItem {
+  return {
+    category: row.category ?? "Cultural Formats",
+    links: [row.url],
+    descrizione: null,
+    nome_trend: row.title ?? null,
+    industry: row.industry ?? null,
+    applicazione: null,
+    canali: null,
+    score: row.score ?? null,
+    createdAt: row.created_at ?? null,
+    rawEmail: row.raw_email ?? null,
+    tags: row.tags ?? null,
+  };
+}
+
+function Page() {
+  const [dbRows, setDbRows] = useState<DbRow[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRows = useCallback(() => {
+    supabase
+      .from("trend_submissions")
+      .select("id, url, title, category, industry, tags, score, created_at, raw_email")
+      .eq("section", "trend-evergreen")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setDbRows(data as DbRow[]);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchRows();
+  }, [fetchRows]);
+
+  const handleDelete = useCallback((url: string) => {
+    setDbRows((prev) => prev.filter((r) => r.url !== url));
+  }, []);
+
+  const handleScoreChange = useCallback((url: string, score: number | null) => {
+    setDbRows((prev) => prev.map((r) => (r.url === url ? { ...r, score } : r)));
+  }, []);
+
+  const dbIds: Record<string, string> = Object.fromEntries(dbRows.map((r) => [r.url, r.id]));
+  const allItems: TrendItem[] = [...dbRows.map(rowToTrendItem), ...trendEvergreen];
+
+  return (
+    <div className="space-y-8">
+      <header className="flex flex-wrap items-start justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">The smartness effect</h1>
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            Persone curiose e fedeli a sé stesse che trovano equilibrio nei piccoli piaceri quotidiani. Per loro, concedersi un momento Allianz Direct non è un'eccezione, ma parte di uno stile di vita consapevole e senza compromessi.
+          </p>
+        </div>
+        <ManualSubmitDialog section="trend-evergreen" onSuccess={fetchRows} />
+      </header>
+      {loading ? (
+        <div className="text-sm text-muted-foreground">Caricamento…</div>
+      ) : (
+        <TrendGrid items={allItems} dbIds={dbIds} onDelete={handleDelete} onScoreChange={handleScoreChange} hideCategoryFilter hideCategory hideScoreFilter />
+      )}
+    </div>
+  );
+}

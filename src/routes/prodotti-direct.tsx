@@ -1,0 +1,118 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState, useCallback } from "react";
+import { trendRealTime } from "@/lib/trends";
+import type { TrendItem } from "@/lib/trends";
+import { ManualSubmitDialog } from "@/components/ManualSubmitDialog";
+import { TrendGrid } from "@/components/TrendGrid";
+import { supabase } from "@/integrations/supabase/client";
+
+export const Route = createFileRoute("/prodotti-direct")({
+  head: () => ({
+    meta: [
+      {
+            "title": "Prodotti Direct — Allianz Direct"
+      },
+      {
+            "name": "description",
+            "content": "Trend social e ispirazioni per Prodotti Direct di Allianz Direct."
+      },
+      {
+            "property": "og:title",
+            "content": "Prodotti Direct — Allianz Direct"
+      },
+      {
+            "property": "og:description",
+            "content": "Trend social e ispirazioni per Prodotti Direct di Allianz Direct."
+      },
+      {
+            "property": "og:type",
+            "content": "website"
+      },
+      {
+            "name": "twitter:card",
+            "content": "summary"
+      }
+],
+  }),
+  component: Page,
+});
+
+type DbRow = {
+  id: string;
+  url: string;
+  title: string | null;
+  category: string | null;
+  industry: string | null;
+  tags: string[] | null;
+  score: number | null;
+  created_at: string | null;
+  raw_email: string | null;
+};
+
+function rowToTrendItem(row: DbRow): TrendItem {
+  return {
+    category: row.category ?? "Trend to Act",
+    links: [row.url],
+    descrizione: null,
+    nome_trend: row.title ?? null,
+    industry: row.industry ?? null,
+    applicazione: null,
+    canali: null,
+    score: row.score ?? null,
+    createdAt: row.created_at ?? null,
+    rawEmail: row.raw_email ?? null,
+    tags: row.tags ?? null,
+  };
+}
+
+function Page() {
+  const [dbRows, setDbRows] = useState<DbRow[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRows = useCallback(() => {
+    supabase
+      .from("trend_submissions")
+      .select("id, url, title, category, industry, tags, score, created_at, raw_email")
+      .eq("section", "trend-real-time")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setDbRows(data as DbRow[]);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchRows();
+  }, [fetchRows]);
+
+  const handleDelete = useCallback((url: string) => {
+    setDbRows((prev) => prev.filter((r) => r.url !== url));
+  }, []);
+
+  const handleScoreChange = useCallback((url: string, score: number | null) => {
+    setDbRows((prev) => prev.map((r) => (r.url === url ? { ...r, score } : r)));
+  }, []);
+
+  const dbIds: Record<string, string> = Object.fromEntries(dbRows.map((r) => [r.url, r.id]));
+  const allItems: TrendItem[] = [...dbRows.map(rowToTrendItem), ...trendRealTime];
+
+  return (
+    <div className="space-y-8">
+      <header className="flex flex-wrap items-start justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">Prodotti Direct</h1>
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            Il momento in cui il morso rivela tutta la magia di Allianz Direct: il crock irresistibile, la frutta vera e la perfetta combinazione con il cioccolato. Una celebrazione della golosità che mette il prodotto al centro della scena.
+          </p>
+        </div>
+        <ManualSubmitDialog section="trend-real-time" onSuccess={fetchRows} />
+      </header>
+      {loading ? (
+        <div className="text-sm text-muted-foreground">Caricamento…</div>
+      ) : (
+        <TrendGrid items={allItems} dbIds={dbIds} onDelete={handleDelete} onScoreChange={handleScoreChange} hideCategoryFilter hideCategory hideScoreFilter />
+      )}
+    </div>
+  );
+}
