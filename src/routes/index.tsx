@@ -40,34 +40,29 @@ function Index() {
       label: "Prodotti Direct",
       //count: trendRealTime.length,
       icon: Zap,
-      blurb: "Il momento in cui il morso rivela tutta la magia di Allianz Direct: il crock irresistibile, la frutta vera e la perfetta combinazione con il cioccolato.",
     },
     {
       to: "/rassicurazioni-su-misura",
       label: "Rassicurazioni su misura",
       //count: trendAttuali.length,
       icon: TrendingUp,
-      blurb: "Un universo visivo che valorizza l'iconico pack Allianz Direct e tutto ciò che rappresenta: qualità premium, ingredienti reali ed esperienza indulgente.",
     },
     {
       to: "/the-smartness-effect",
       label: "The smartness effect",
       // count: trendEvergreen.length,
       icon: Sparkles,
-      blurb: "Persone curiose e fedeli a se stesse che trovano equilibrio nei piccoli piaceri quotidiani.",
     },
     {
       to: "/competitor",
       label: "Competitor",
       //count: influencer.length,
       icon: Sparkles,
-      blurb: "Monitoraggio Brand e Competitor - Real Time",
     },
     {
       to: "/piano-editoriale",
       label: "Piano Editoriale",
       icon: CalendarDays,
-      blurb: "Calendario editoriale mensile con copy, visual e approvazioni.",
     },
   ] as const;
 
@@ -103,7 +98,6 @@ function Index() {
                 {"count" in c ? (c.count as number) : null}
               </span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">{c.blurb}</p>
             <span className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
               Apri <ArrowRight className="size-4 transition group-hover:translate-x-1" />
             </span>

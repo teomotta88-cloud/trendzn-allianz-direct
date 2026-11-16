@@ -102,9 +102,6 @@ function Page() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="space-y-2">
           <h1 className="font-display text-3xl font-bold sm:text-4xl">The smartness effect</h1>
-          <p className="max-w-2xl text-sm text-muted-foreground">
-            Persone curiose e fedeli a sé stesse che trovano equilibrio nei piccoli piaceri quotidiani. Per loro, concedersi un momento Allianz Direct non è un'eccezione, ma parte di uno stile di vita consapevole e senza compromessi.
-          </p>
         </div>
         <ManualSubmitDialog section="trend-evergreen" onSuccess={fetchRows} />
       </header>
