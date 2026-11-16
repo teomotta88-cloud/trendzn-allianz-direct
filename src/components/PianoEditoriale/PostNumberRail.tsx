@@ -5,6 +5,9 @@ const RAIL_WIDTH = 56;
 // Margine laterale interno: i riquadri ingranditi (scale) non vengono tagliati dal contenitore scrollabile
 const RAIL_PAD = 10;
 const GAP = 16;
+// Ingombro totale a sinistra delle schede: RAIL_WIDTH + 2*RAIL_PAD + GAP = 92px. La colonna dei post
+// in piano-editoriale.index.tsx riserva lo stesso spazio (sm:ml-[92px]) sotto i 1520px, dove il margine
+// della pagina non basta; da 1520px in su il margine laterale è già sufficiente.
 
 const PALETTE = {
   none: { border: "var(--color-border)", bg: "transparent", text: "var(--color-muted-foreground)", solid: "var(--color-primary)" },
