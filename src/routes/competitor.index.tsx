@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { ManualSubmitDialog } from "@/components/ManualSubmitDialog";
 import { PlatformIcon } from "@/components/SocialEmbed";
 import { Search, Trash2 } from "lucide-react";
@@ -522,29 +522,11 @@ function PlatformBadge({ platform }: { platform: string }) {
   );
 }
 
-function LazyEmbed({ embedUrl, height }: { embedUrl: string; height: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+function IframeEmbed({ embedUrl, height }: { embedUrl: string; height: number }) {
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "300px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={ref} style={{ position: "relative", background: "#f8f9fa", minHeight: height }}>
+    <div style={{ position: "relative", background: "#f8f9fa", minHeight: height }}>
       {!loaded && (
         <div
           style={{
@@ -561,19 +543,16 @@ function LazyEmbed({ embedUrl, height }: { embedUrl: string; height: number }) {
           Caricamento…
         </div>
       )}
-      {visible && (
-        <iframe
-          src={embedUrl}
-          width="100%"
-          height={height}
-          frameBorder={0}
-          allowFullScreen
-          scrolling="no"
-          loading="lazy"
-          style={{ display: "block", border: "none", position: "relative" }}
-          onLoad={() => setLoaded(true)}
-        />
-      )}
+      <iframe
+        src={embedUrl}
+        width="100%"
+        height={height}
+        frameBorder={0}
+        allowFullScreen
+        scrolling="no"
+        style={{ display: "block", border: "none", position: "relative" }}
+        onLoad={() => setLoaded(true)}
+      />
     </div>
   );
 }
@@ -661,7 +640,7 @@ function PostCard({ post }: { post: Post }) {
       </div>
 
       {embedUrl ? (
-        <LazyEmbed embedUrl={embedUrl} height={h} />
+        <IframeEmbed embedUrl={embedUrl} height={h} />
       ) : (
         <a
           href={post.url}
@@ -813,7 +792,6 @@ function DateRangeFilter({
   );
 }
 
-const PAGE_SIZE = 12;
 
 function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => void }) {
   const [data, setData] = useState<TrendsData | null>(null);
@@ -821,7 +799,6 @@ function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => v
   const [platformFilter, setPlatformFilter] = useState("tutti");
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState<SortOrder>("recenti");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const [datePreset, setDatePreset] = useState<DatePreset>("tutto");
   const [customFrom, setCustomFrom] = useState("");
@@ -836,9 +813,6 @@ function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => v
       .catch(() => setError("Impossibile caricare il feed."));
   }, []);
 
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [platformFilter, search, sortOrder, datePreset, customFrom, customTo]);
 
   const dateRange = useMemo(() => {
     const now = new Date();
@@ -941,8 +915,7 @@ function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => v
     return matchPlatform && matchSearch && matchDate;
   });
 
-  const visiblePosts = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
+  const visiblePosts = filtered;
   const platforms = ["tutti", ...new Set(allPosts.map((p) => p.platform))];
 
   return (
@@ -1001,16 +974,6 @@ function CompetitorFeedView({ tab, setTab }: { tab?: Tab; setTab?: (t: Tab) => v
             ))}
           </div>
 
-          {hasMore && (
-            <div className="flex justify-center pt-2">
-              <button
-                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-                className="rounded-full border border-border bg-card px-6 py-2.5 text-sm font-medium text-foreground transition hover:border-primary"
-              >
-                Carica altri ({filtered.length - visibleCount} rimanenti)
-              </button>
-            </div>
-          )}
         </>
       )}
     </div>
