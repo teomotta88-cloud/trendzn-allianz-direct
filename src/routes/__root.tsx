@@ -131,9 +131,9 @@ function RootComponent() {
 
 const NAV_ITEMS = [
   { to: "/", label: "Home" },
-  { to: "/taste", label: "TASTE" },
-  { to: "/world", label: "WORLD" },
-  { to: "/people", label: "PEOPLE" },
+  { to: "/taste", label: "Prodotti Direct" },
+  { to: "/world", label: "Rassicurazioni su misura" },
+  { to: "/people", label: "The smartness effect" },
   { to: "/competitor", label: "Competitor" },
   { to: "/piano-editoriale", label: "Piano Editoriale" },
 ];
