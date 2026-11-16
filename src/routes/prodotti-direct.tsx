@@ -102,9 +102,6 @@ function Page() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="space-y-2">
           <h1 className="font-display text-3xl font-bold sm:text-4xl">Prodotti Direct</h1>
-          <p className="max-w-2xl text-sm text-muted-foreground">
-            Il momento in cui il morso rivela tutta la magia di Allianz Direct: il crock irresistibile, la frutta vera e la perfetta combinazione con il cioccolato. Una celebrazione della golosità che mette il prodotto al centro della scena.
-          </p>
         </div>
         <ManualSubmitDialog section="trend-real-time" onSuccess={fetchRows} />
       </header>
